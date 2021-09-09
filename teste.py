@@ -1,8 +1,10 @@
 from matplotlib import colors, cycler
+import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button, RadioButtons
 import re
+
 '''
 CRIADO E DESENVOLVIDO POR J.S.ARAUJO
 
@@ -12,7 +14,6 @@ CRIADO E DESENVOLVIDO POR J.S.ARAUJO
 lista = []
 # Caminho do arquivo
 arquivo = open("arquivos/valores.txt", 'r')
-
 # Abre o arquivo , explode, e separa por virgula cada index
 for linha in arquivo:
     linha = linha.strip()
@@ -20,7 +21,6 @@ for linha in arquivo:
     lista.append(linha)
 # fecha o arquivo
 arquivo.close()
-
 # cria um lista de objetos com os dados filtrados
 dados = []
 for l in lista:
@@ -44,14 +44,16 @@ colors = cycler('color',
                  '#EECC55', '#88BB44', '#FFBBBB'])
 plt.subplots_adjust(bottom=0.35)
 plt.title("ORION")
-plt.rc('axes', facecolor='#E6E6E6', edgecolor='none',
+plt.rc('axes', facecolor='#88BB44', edgecolor='none',
        axisbelow=True, grid=True, prop_cycle=colors)
 
 # Seta informações de label
+
+
 def btl():
     ax.set_ylabel("Balança")
     ax.set_xlabel("Tempo")
-    
+
 
 # iterações e tempos inicias
 iteracoes = 0
@@ -71,8 +73,10 @@ bt = Button(rs, 'Resetar', color='gold',
                 hovercolor='skyblue')
 
 # Função para atualizar os valores
+
+
 def update(val):
-    #ax.clear()
+    # ax.clear()
     ax.cla()
     tempo = t.val
     iter = i.val
@@ -83,15 +87,19 @@ def update(val):
     ax.plot(xx)
 
 # Função para resetar
+
+
 def reset(event):
     t.reset()
     i.reset()
     ax.clear()
     btl()
 
+
 # Captura o evento do click ou da mudança
 t.on_changed(update)
 i.on_changed(update)
 bt.on_clicked(reset)
 # Plota o gráfico
+
 plt.show()
