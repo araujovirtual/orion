@@ -3,6 +3,8 @@ import re
 import matplotlib.pyplot as plt
 from datetime import datetime as dt
 
+import numpy as np
+
 '''
 Sistema de monitoria de logs
 Trainees: Jucinaldo.S.A - UTFPR - RA 02296500
@@ -39,22 +41,12 @@ for l in lista:
 
 
 
-
-# Quantidade de amostras
-n = len(dados)
 # Monta a tabela 0.25ms * numero de linhas = tempo
-xx = [float(dados[x][3:]) for x in range(0, len(dados),1)]
+xx = [float(dados[x][3:]) for x in range(0, len(dados),5)]
+
+fig, ax = plt.subplots(2)
 
 
-
-
-# Gera um grafo simples
-#with plt.style.context('dark_background'):
-plt.title('Orion 2021')
-plt.plot(xx)
-plt.xlabel("TEMPO")
-plt.ylabel("DADOS")
+ax[0].plot(xx)
+ax[1].plot(xx)
 plt.show()
-
-
-
