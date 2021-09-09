@@ -41,7 +41,7 @@ xx = [float(dados[x][3:]) for x in range(iteracoes, len(dados),tempo)]
 
 
 
-# Cria 3 espadas para 3 sliders red,green,blue
+# Cria os sliders
 tt = plt.axes([0.125,0.1,0.78,0.03])
 ii = plt.axes([0.125,0.2,0.78,0.03])
 
