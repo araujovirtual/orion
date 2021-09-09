@@ -1,6 +1,7 @@
+from matplotlib import colors
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider, Button
+from matplotlib.widgets import Slider, Button, RadioButtons
 import re
 
 # Cria um array de um lista de objetos
@@ -31,33 +32,33 @@ for l in lista:
 fig, ax = plt.subplots()
 plt.subplots_adjust(bottom=0.35)
 
+# iterações e tempos inicias
 iteracoes = 0
 tempo = len(dados)
 
-# Cria e plota o grafico de barra
-xx = [float(dados[x][3:]) for x in range(iteracoes, len(dados),tempo)]
+# Cria os axes para os sliders
+tt = plt.axes([0.125, 0.1, 0.78, 0.03])
+ii = plt.axes([0.125, 0.2, 0.78, 0.03])
+
+# Cria o slider propriamente dito
+t = Slider(tt, "Tempo", 1.0, len(dados))
+i = Slider(ii, "Iterações", 0.0, len(dados))
 
 
-
-
-
-# Cria 3 espadas para 3 sliders red,green,blue
-tt = plt.axes([0.125,0.1,0.78,0.03])
-ii = plt.axes([0.125,0.2,0.78,0.03])
-
-t = Slider(tt,"Tempo",1.0,len(dados))
-i = Slider(ii,"Iterações",0.0,len(dados))
-
+# Função para atualizar os valores
 def update(val):
     ax.clear()
     tempo = t.val
     iter = i.val
-    print(int(tempo))
-    xx = [float(dados[x][3:]) for x in range(int(iter), len(dados),int(tempo))]
+    #print(int(tempo))
+    xx = [float(dados[x][3:])
+          for x in range(int(iter), len(dados), int(tempo))]
     ax.plot(xx)
-    
+
+
+# Captura o evento do click ou da mudança
 t.on_changed(update)
 i.on_changed(update)
 
-
+# Plota o gráfico
 plt.show()
