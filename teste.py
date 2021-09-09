@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button, RadioButtons
 import re
-
-
 '''
 CRIADO E DESENVOLVIDO POR J.S.ARAUJO
 
@@ -33,18 +31,14 @@ for l in lista:
             # insere os dados caso o filtro tenha sido aplciado
             dados.append(x.group())
 
-# imagem de fundo
-
-
 # Cria uma subplot
 fig, ax = plt.subplots()
 fig.set_size_inches(10.5, 5.5)
 fig.canvas.manager.set_window_title('ORION')
 fig.patch.set_facecolor('#E0E0E0')
 fig.patch.set_alpha(0.5)
-# Configuração da figura plot
 
-#
+# Configuração da figura plot
 colors = cycler('color',
                 ['#EE6666', '#3388BB', '#9988DD',
                  '#EECC55', '#88BB44', '#FFBBBB'])
@@ -53,9 +47,11 @@ plt.title("ORION")
 plt.rc('axes', facecolor='#E6E6E6', edgecolor='none',
        axisbelow=True, grid=True, prop_cycle=colors)
 
-ax.set_ylabel("Balança")
-ax.set_xlabel("Tempo")
-
+# Seta informações de label
+def btl():
+    ax.set_ylabel("Balança")
+    ax.set_xlabel("Tempo")
+    
 
 # iterações e tempos inicias
 iteracoes = 0
@@ -74,33 +70,28 @@ i = Slider(ii, "Iterações", 0.0, len(dados))
 bt = Button(rs, 'Resetar', color='gold',
                 hovercolor='skyblue')
 
-
 # Função para atualizar os valores
 def update(val):
-    ax.clear()
+    #ax.clear()
+    ax.cla()
     tempo = t.val
     iter = i.val
     # print(int(tempo))
     xx = [float(dados[x][3:])
           for x in range(int(iter), len(dados), int(tempo))]
-    ax.set_ylabel("Balança")
-    ax.set_xlabel("Tempo")
+    btl()
     ax.plot(xx)
-
 
 # Função para resetar
 def reset(event):
     t.reset()
     i.reset()
     ax.clear()
-    ax.set_ylabel("Balança")
-    ax.set_xlabel("Tempo")
-
+    btl()
 
 # Captura o evento do click ou da mudança
 t.on_changed(update)
 i.on_changed(update)
 bt.on_clicked(reset)
 # Plota o gráfico
-
 plt.show()
