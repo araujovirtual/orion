@@ -45,19 +45,7 @@ t = Slider(tt, "Tempo", 1.0, len(dados))
 i = Slider(ii, "Iterações", 0.0, len(dados))
 
 
-<<<<<<< HEAD
 # Função para atualizar os valores
-=======
-
-
-# Cria os sliders
-tt = plt.axes([0.125,0.1,0.78,0.03])
-ii = plt.axes([0.125,0.2,0.78,0.03])
-
-t = Slider(tt,"Tempo",1.0,len(dados))
-i = Slider(ii,"Iterações",0.0,len(dados))
-
->>>>>>> 0c8c3d45dd08366ecf8371dc231d6d99eff30081
 def update(val):
     ax.clear()
     tempo = t.val
@@ -72,9 +60,5 @@ def update(val):
 t.on_changed(update)
 i.on_changed(update)
 
-<<<<<<< HEAD
 # Plota o gráfico
-=======
-
->>>>>>> 0c8c3d45dd08366ecf8371dc231d6d99eff30081
 plt.show()
