@@ -1,8 +1,14 @@
-from matplotlib import colors
+from matplotlib import colors, cycler
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button, RadioButtons
 import re
+
+
+'''
+CRIADO E DESENVOLVIDO POR J.S.ARAUJO
+
+'''
 
 # Cria um array de um lista de objetos
 lista = []
@@ -30,18 +36,23 @@ for l in lista:
 # imagem de fundo
 
 
-
 # Cria uma subplot
 fig, ax = plt.subplots()
 fig.set_size_inches(10.5, 5.5)
 fig.canvas.manager.set_window_title('ORION')
 fig.patch.set_facecolor('#E0E0E0')
-fig.patch.set_alpha(0.7)
+fig.patch.set_alpha(0.5)
 # Configuração da figura plot
 
-# 
+#
+colors = cycler('color',
+                ['#EE6666', '#3388BB', '#9988DD',
+                 '#EECC55', '#88BB44', '#FFBBBB'])
 plt.subplots_adjust(bottom=0.35)
 plt.title("ORION")
+plt.rc('axes', facecolor='#E6E6E6', edgecolor='none',
+       axisbelow=True, grid=True, prop_cycle=colors)
+
 ax.set_ylabel("Balança")
 ax.set_xlabel("Tempo")
 
@@ -69,13 +80,13 @@ def update(val):
     ax.clear()
     tempo = t.val
     iter = i.val
-    #print(int(tempo))
+    # print(int(tempo))
     xx = [float(dados[x][3:])
           for x in range(int(iter), len(dados), int(tempo))]
     ax.set_ylabel("Balança")
     ax.set_xlabel("Tempo")
     ax.plot(xx)
-    
+
 
 # Função para resetar
 def reset(event):
@@ -85,9 +96,11 @@ def reset(event):
     ax.set_ylabel("Balança")
     ax.set_xlabel("Tempo")
 
+
 # Captura o evento do click ou da mudança
 t.on_changed(update)
 i.on_changed(update)
 bt.on_clicked(reset)
 # Plota o gráfico
+
 plt.show()
