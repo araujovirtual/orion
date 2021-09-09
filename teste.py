@@ -1,6 +1,4 @@
 from matplotlib import colors, cycler
-import matplotlib
-import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button, RadioButtons
 import re
@@ -48,12 +46,9 @@ plt.rc('axes', facecolor='#88BB44', edgecolor='none',
        axisbelow=True, grid=True, prop_cycle=colors)
 
 # Seta informações de label
-
-
 def btl():
     ax.set_ylabel("Balança")
     ax.set_xlabel("Tempo")
-
 
 # iterações e tempos inicias
 iteracoes = 0
@@ -73,8 +68,6 @@ bt = Button(rs, 'Resetar', color='gold',
                 hovercolor='skyblue')
 
 # Função para atualizar os valores
-
-
 def update(val):
     # ax.clear()
     ax.cla()
@@ -87,19 +80,15 @@ def update(val):
     ax.plot(xx)
 
 # Função para resetar
-
-
 def reset(event):
     t.reset()
     i.reset()
     ax.clear()
     btl()
 
-
 # Captura o evento do click ou da mudança
 t.on_changed(update)
 i.on_changed(update)
 bt.on_clicked(reset)
 # Plota o gráfico
-
 plt.show()
